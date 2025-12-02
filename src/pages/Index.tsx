@@ -1,12 +1,42 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { Navigation } from "@/components/Navigation";
+import { Hero } from "@/components/Hero";
+import { Services } from "@/components/Services";
+import { ContactInfo } from "@/components/ContactInfo";
+import { ChatBot } from "@/components/ChatBot";
 
 const Index = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-background font-inter">
+      <Navigation />
+      
+      <main>
+        <div id="hero">
+          <Hero />
+        </div>
+        
+        <div id="services">
+          <Services />
+        </div>
+        
+        <div id="contact">
+          <ContactInfo />
+        </div>
+      </main>
+
+      <footer className="border-t border-border py-8 px-6 lg:px-12">
+        <div className="container">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="text-muted-foreground text-sm font-inter">
+              © 2024 Meisterschnitt. Alle Rechte vorbehalten.
+            </p>
+            <p className="font-playfair text-lg">
+              Tradition seit <span className="text-primary">1987</span>
+            </p>
+          </div>
+        </div>
+      </footer>
+
+      <ChatBot />
     </div>
   );
 };
