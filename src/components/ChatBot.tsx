@@ -1,57 +1,40 @@
-import { MessageCircle, X } from "lucide-react";
-import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
+import { useEffect } from "react";
 
 export const ChatBot = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
   useEffect(() => {
     // Load Vapi widget script
     const script = document.createElement("script");
-    script.src = "https://cdn.jsdelivr.net/gh/VapiAI/html-script-tag@latest/dist/assets/index.js";
-    script.defer = true;
+    script.src = "https://unpkg.com/@vapi-ai/client-sdk-react/dist/embed/widget.umd.js";
     script.async = true;
     document.body.appendChild(script);
 
+    // Create the vapi-widget element
+    script.onload = () => {
+      if (!document.querySelector("vapi-widget")) {
+        const widget = document.createElement("vapi-widget");
+        widget.setAttribute("public-key", "b03f1c67-af88-4007-888c-bf9787ddc1fd");
+        widget.setAttribute("assistant-id", "b2c9f1e7-4a28-4938-9c3a-deb79252bbc5");
+        widget.setAttribute("mode", "chat");
+        widget.setAttribute("theme", "dark");
+        widget.setAttribute("size", "full");
+        widget.setAttribute("base-color", "#1a1814");
+        widget.setAttribute("accent-color", "#c9a227");
+        widget.setAttribute("button-base-color", "#c9a227");
+        widget.setAttribute("button-accent-color", "#1a1814");
+        widget.setAttribute("main-label", "Termin vereinbaren");
+        widget.setAttribute("empty-chat-message", "Hallo! Wie kann ich Ihnen heute helfen?");
+        document.body.appendChild(widget);
+      }
+    };
+
     return () => {
-      // Cleanup script on unmount
-      const existingScript = document.querySelector(`script[src="${script.src}"]`);
-      if (existingScript) {
-        existingScript.remove();
+      // Cleanup
+      const existingWidget = document.querySelector("vapi-widget");
+      if (existingWidget) {
+        existingWidget.remove();
       }
     };
   }, []);
 
-  useEffect(() => {
-    if (isOpen && (window as any).vapiSDK) {
-      // Initialize Vapi when chat is opened
-      (window as any).vapiSDK.run({
-        apiKey: "b03f1c67-af88-4007-888c-bf9787ddc1fd",
-        assistant: "b2c9f1e7-4a28-4938-9c3a-deb79252bbc5",
-        config: {
-          position: "bottom-right",
-          offset: "80px",
-        },
-      });
-    }
-  }, [isOpen]);
-
-  const handleToggle = () => {
-    setIsOpen(!isOpen);
-  };
-
-  return (
-    <Button
-      onClick={handleToggle}
-      size="lg"
-      className="fixed bottom-8 right-8 z-50 h-16 w-16 rounded-full shadow-2xl bg-primary hover:bg-primary/90 hover:scale-110 transition-all duration-300 group"
-      aria-label="Termin vereinbaren"
-    >
-      {isOpen ? (
-        <X className="h-6 w-6 text-primary-foreground" />
-      ) : (
-        <MessageCircle className="h-6 w-6 text-primary-foreground group-hover:animate-pulse" />
-      )}
-    </Button>
-  );
+  return null; // Widget is appended to body directly
 };
