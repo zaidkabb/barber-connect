@@ -16,13 +16,19 @@ export const ChatBot = () => {
         widget.setAttribute("assistant-id", "b2c9f1e7-4a28-4938-9c3a-deb79252bbc5");
         widget.setAttribute("mode", "chat");
         widget.setAttribute("theme", "dark");
-        widget.setAttribute("size", "full");
-        widget.setAttribute("base-color", "#1a1814");
-        widget.setAttribute("accent-color", "#c9a227");
-        widget.setAttribute("button-base-color", "#c9a227");
-        widget.setAttribute("button-accent-color", "#1a1814");
+        widget.setAttribute("size", "compact");
+        widget.setAttribute("position", "bottom-right");
+        widget.setAttribute("offset", "24px");
+        widget.setAttribute("base-color", "#161412");
+        widget.setAttribute("accent-color", "#d4a843");
+        widget.setAttribute("button-base-color", "#d4a843");
+        widget.setAttribute("button-accent-color", "#161412");
+        widget.setAttribute("button-border-radius", "9999px");
+        widget.setAttribute("chat-border-radius", "12px");
         widget.setAttribute("main-label", "Termin vereinbaren");
         widget.setAttribute("empty-chat-message", "Hallo! Wie kann ich Ihnen heute helfen?");
+        widget.setAttribute("chat-width", "380px");
+        widget.setAttribute("chat-height", "520px");
         document.body.appendChild(widget);
       }
     };
